@@ -19,8 +19,8 @@ namespace WindowsFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            ServerForm serverForm = new ServerForm();
-            serverForm.Show();
+            Server_input serverInput = new Server_input();
+            serverInput.Show();
             this.Hide();
         }
 

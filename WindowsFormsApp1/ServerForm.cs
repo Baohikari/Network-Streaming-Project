@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Threading;
 using System.Windows.Forms;
@@ -25,6 +26,9 @@ namespace WindowsFormsApp1
         public ServerForm()
         {
             InitializeComponent();
+            lbl_name.Text = Singleton.Instance.serverName;
+            lbl_title.Text = Singleton.Instance.serverTitle;
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -223,15 +227,24 @@ namespace WindowsFormsApp1
 
         public string GetLocalIPAddress()
         {
-            foreach (var ip in Dns.GetHostAddresses(Dns.GetHostName()))
+            foreach (var networkInterface in NetworkInterface.GetAllNetworkInterfaces())
             {
-                // Kiểm tra xem IP có phải là IPv4 và không phải là địa chỉ loopback (127.0.0.1)
-                if (ip.AddressFamily == AddressFamily.InterNetwork && !ip.ToString().StartsWith("127"))
+                // Kiểm tra nếu giao diện mạng là Wi-Fi và đang hoạt động
+                if (networkInterface.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 &&
+                    networkInterface.OperationalStatus == OperationalStatus.Up)
                 {
-                    return ip.ToString();
+                    var ipProperties = networkInterface.GetIPProperties();
+                    foreach (var ip in ipProperties.UnicastAddresses)
+                    {
+                        // Chỉ lấy địa chỉ IPv4
+                        if (ip.Address.AddressFamily == AddressFamily.InterNetwork)
+                        {
+                            return ip.Address.ToString();
+                        }
+                    }
                 }
             }
-            return "127.0.0.1"; // Nếu không tìm thấy IP hợp lệ, trả về localhost
+            return "127.0.0.1"; // Trả về localhost nếu không tìm thấy
         }
     }
 }
