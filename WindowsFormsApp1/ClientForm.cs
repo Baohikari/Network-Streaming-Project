@@ -121,9 +121,9 @@ namespace WindowsFormsApp1
         {
             try
             {
-                if(client != null && client.Connected)
+                if (client != null && client.Connected)
                 {
-                    string comment = commenBtn.Text.Trim();
+                    string comment = commentBox.Text.Trim();
                     if (!string.IsNullOrEmpty(comment))
                     {
                         NetworkStream stream = client.GetStream();

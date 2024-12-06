@@ -34,6 +34,7 @@
             this.lbl_title = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.lbl_name = new System.Windows.Forms.Label();
+            this.startShareScreen = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.streaming_screen)).BeginInit();
             this.SuspendLayout();
             // 
@@ -94,11 +95,22 @@
             this.lbl_name.TabIndex = 5;
             this.lbl_name.Text = "Bảo Bảo";
             // 
+            // startShareScreen
+            // 
+            this.startShareScreen.Location = new System.Drawing.Point(21, 379);
+            this.startShareScreen.Name = "startShareScreen";
+            this.startShareScreen.Size = new System.Drawing.Size(148, 23);
+            this.startShareScreen.TabIndex = 6;
+            this.startShareScreen.Text = "Share screen";
+            this.startShareScreen.UseVisualStyleBackColor = true;
+            this.startShareScreen.Click += new System.EventHandler(this.startShareScreen_Click);
+            // 
             // ServerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.startShareScreen);
             this.Controls.Add(this.lbl_name);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lbl_title);
@@ -121,5 +133,6 @@
         private System.Windows.Forms.Label lbl_title;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lbl_name;
+        private System.Windows.Forms.Button startShareScreen;
     }
 }
